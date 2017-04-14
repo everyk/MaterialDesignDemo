@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_1"
+            android:icon="@mipmap/ic_task"
+            android:title="任务" />
+        <item
+            android:id="@+id/item_2"
+            android:icon="@mipmap/ic_del_list"
+            android:title="列表" />
+        <item
+            android:id="@+id/item_3"
+            android:icon="@mipmap/ic_del"
+            android:title="删除" />
+        <item
+            android:id="@+id/item_4"
+            android:icon="@mipmap/ic_classify"
+            android:title="分类" />
+        <item
+            android:id="@+id/item_5"
+            android:icon="@mipmap/ic_about"
+            android:title="关于" />
+
+
+    </group>
+</menu>
