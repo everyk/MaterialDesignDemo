@@ -12,8 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.materialdesigndemo.activity.R;
 
 
@@ -25,6 +27,7 @@ public class PagerFragment extends Fragment {
 
 
     private int mPage;
+    private int[] child = new int[]{R.mipmap.xh01, R.mipmap.xh02, R.mipmap.xh03, R.mipmap.xh04, R.mipmap.xh05, R.mipmap.xh06};
 
 
     public static PagerFragment newInstance(int page) {
@@ -54,15 +57,13 @@ public class PagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fg_context, container, false);
-      //  TextView tvContext = (TextView) view.findViewById(R.id.tv_context);
+
         RecyclerView rvFg = (RecyclerView) view.findViewById(R.id.rv_fg);
 
 
-     //   tvContext.setText("《《第" + mPage + "页》》");
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvFg.setLayoutManager(linearLayoutManager);
-        ItemAdapter itemAdapter = new ItemAdapter(getContext());
+        ItemAdapter itemAdapter = new ItemAdapter(getContext(), child);
         rvFg.setAdapter(itemAdapter);
 
         return view;
@@ -72,16 +73,19 @@ public class PagerFragment extends Fragment {
 
 class ItemAdapter extends RecyclerView.Adapter {
     private Context mContext;
+    private int[] mChild;
 
-    public ItemAdapter(Context context) {
+    public ItemAdapter(Context context, int[] child) {
         this.mContext = context;
+        this.mChild = child;
     }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 
-        View inflate = LayoutInflater.from(mContext).inflate(R.layout.item_adapter, null);
+        View inflate = LayoutInflater.from(mContext).inflate(R.layout.item_adapter, parent, false);
 
 
         return new ItemHolder(inflate);
@@ -91,27 +95,25 @@ class ItemAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ((ItemHolder) holder).tvItem.setText("条目内容" + position);
-        ((ItemHolder) holder).tvItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
+        Glide.with(mContext).load(mChild[position]).into(((ItemHolder) holder).ivPicture);
+
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        return mChild.length;
     }
 
     private class ItemHolder extends RecyclerView.ViewHolder {
 
-        private final TextView tvItem;
+
+        private final ImageView ivPicture;
 
         public ItemHolder(View inflate) {
             super(inflate);
-            tvItem = (TextView) inflate.findViewById(R.id.tv_item);
+            ivPicture = (ImageView) inflate.findViewById(R.id.iv_picture);
+
         }
     }
 }
