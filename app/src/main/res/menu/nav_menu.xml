@@ -4,23 +4,16 @@
         <item
             android:id="@+id/item_1"
             android:icon="@mipmap/ic_task"
-            android:title="任务" />
+            android:title="小孩" />
         <item
             android:id="@+id/item_2"
             android:icon="@mipmap/ic_del_list"
-            android:title="列表" />
+            android:title="风景" />
         <item
             android:id="@+id/item_3"
             android:icon="@mipmap/ic_del"
-            android:title="删除" />
-        <item
-            android:id="@+id/item_4"
-            android:icon="@mipmap/ic_classify"
-            android:title="分类" />
-        <item
-            android:id="@+id/item_5"
-            android:icon="@mipmap/ic_about"
-            android:title="关于" />
+            android:title="宠物" />
+
 
 
     </group>

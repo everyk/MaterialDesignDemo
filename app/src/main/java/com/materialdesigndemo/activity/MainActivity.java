@@ -1,6 +1,7 @@
 package com.materialdesigndemo.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -17,7 +18,9 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.util.Util;
 import com.materialdesigndemo.adapter.MyFragmentPageAdapter;
+import com.materialdesigndemo.utils.HandlerUtils;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navView;
     private DrawerLayout drawer;
     private FloatingActionButton fabMain;
+
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +119,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+Toast.makeText(MainActivity.this,item.getItemId()+"//"+item.getGroupId()+"//"+item.getOrder(),Toast.LENGTH_SHORT).show();
+if (item.toString().equals("小孩")){
+
+    HandlerUtils.sendMessage(mHandler,0);
+Toast.makeText(MainActivity.this,"0",Toast.LENGTH_SHORT).show();
+
+}else  if (item.toString().equals("风景")){
+    HandlerUtils.sendMessage(mHandler,1);
+Toast.makeText(MainActivity.this,"1",Toast.LENGTH_SHORT).show();
+
+}else if (item.toString().equals("宠物")){
+Toast.makeText(MainActivity.this,"2",Toast.LENGTH_SHORT).show();
+
+    HandlerUtils.sendMessage(mHandler,2);
+}
         item.setChecked(true);
         drawer.closeDrawers();
 
