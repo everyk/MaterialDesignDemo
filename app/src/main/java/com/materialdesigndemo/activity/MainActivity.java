@@ -18,9 +18,8 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.bumptech.glide.util.Util;
 import com.materialdesigndemo.adapter.MyFragmentPageAdapter;
-import com.materialdesigndemo.utils.HandlerUtils;
+import com.materialdesigndemo.utils.MDUtils;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -33,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private FloatingActionButton fabMain;
 
-    private Handler mHandler = new Handler();
+
+    private MyFragmentPageAdapter myFragmentPageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void initData() {
 
-        // tabLayout.setupWithViewPager(vpMain);
+
         setSupportActionBar(tbMain);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, tbMain, R.string.drawer_open, R.string.drawer_close);
         drawer.setDrawerListener(toggle);
@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fabMain.setOnClickListener(this);
 
 
-        MyFragmentPageAdapter myFragmentPageAdapter = new MyFragmentPageAdapter(getSupportFragmentManager(), this);
+       myFragmentPageAdapter = new MyFragmentPageAdapter(getSupportFragmentManager(), this);
         vpMain.setAdapter(myFragmentPageAdapter);
-        tabLayout.setupWithViewPager(vpMain);
+       tabLayout.setupWithViewPager(vpMain);
 
 
     }
@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer);
-
         tbMain = (Toolbar) findViewById(R.id.tb_main);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         vpMain = (ViewPager) findViewById(R.id.vp_main);
@@ -120,23 +119,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-Toast.makeText(MainActivity.this,item.getItemId()+"//"+item.getGroupId()+"//"+item.getOrder(),Toast.LENGTH_SHORT).show();
-if (item.toString().equals("小孩")){
 
-    HandlerUtils.sendMessage(mHandler,0);
-Toast.makeText(MainActivity.this,"0",Toast.LENGTH_SHORT).show();
+        if (item.toString().equals("小孩")) {
+            MDUtils.CHOOSE=MDUtils.CHILD;
 
-}else  if (item.toString().equals("风景")){
-    HandlerUtils.sendMessage(mHandler,1);
-Toast.makeText(MainActivity.this,"1",Toast.LENGTH_SHORT).show();
+        } else if (item.toString().equals("风景")) {
+            MDUtils.CHOOSE=MDUtils.SCENERY;
 
-}else if (item.toString().equals("宠物")){
-Toast.makeText(MainActivity.this,"2",Toast.LENGTH_SHORT).show();
+        } else if (item.toString().equals("宠物")) {
+            MDUtils.CHOOSE=MDUtils.PET;
+        }
 
-    HandlerUtils.sendMessage(mHandler,2);
-}
-        item.setChecked(true);
-        drawer.closeDrawers();
 
         return false;
     }

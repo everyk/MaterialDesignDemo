@@ -2,6 +2,7 @@ package com.materialdesigndemo.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,18 +22,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.materialdesigndemo.activity.ItemActivity;
 import com.materialdesigndemo.activity.R;
+import com.materialdesigndemo.utils.MDUtils;
 
 
 /**
  * Created by KHQ on 2017/4/14.
  */
 
-public class PagerFragment extends Fragment  implements Handler.Callback{
+public class PagerFragment extends Fragment {
 
 
     private int mPage;
-    private int[] child = new int[]{R.mipmap.xh01, R.mipmap.xh02, R.mipmap.xh03, R.mipmap.xh04, R.mipmap.xh05, R.mipmap.xh06};
+    private int[] mData;
 
 
     public static PagerFragment newInstance(int page) {
@@ -54,6 +57,14 @@ public class PagerFragment extends Fragment  implements Handler.Callback{
 
         mPage = getArguments().getInt("page");
 
+        if (MDUtils.CHOOSE == MDUtils.CHILD) {
+            mData = new int[]{R.mipmap.xh01, R.mipmap.xh02, R.mipmap.xh03, R.mipmap.xh04, R.mipmap.xh05, R.mipmap.xh06};
+        } else if (MDUtils.CHOOSE == MDUtils.SCENERY) {
+            mData = new int[]{R.mipmap.fj01, R.mipmap.fj02, R.mipmap.fj03, R.mipmap.fj04, R.mipmap.fj05, R.mipmap.fj06};
+        } else if (MDUtils.CHOOSE == MDUtils.PET) {
+            mData = new int[]{R.mipmap.gg01, R.mipmap.gg02, R.mipmap.gg03, R.mipmap.gg04, R.mipmap.gg05, R.mipmap.gg06};
+        }
+
 
     }
 
@@ -65,52 +76,38 @@ public class PagerFragment extends Fragment  implements Handler.Callback{
 
         RecyclerView rvFg = (RecyclerView) view.findViewById(R.id.rv_fg);
 
-if (mPage==0){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        if (mPage == 0) {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
-        rvFg.setLayoutManager(linearLayoutManager);
-}else if (mPage==1){
-    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-    linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-    rvFg.setLayoutManager(linearLayoutManager);
-}else if (mPage==2){
-    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+            rvFg.setLayoutManager(linearLayoutManager);
+        } else if (mPage == 1) {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            rvFg.setLayoutManager(linearLayoutManager);
+        } else if (mPage == 2) {
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
 
-    rvFg.setLayoutManager(gridLayoutManager);
-
-
-}else if (mPage==3){
-
-    StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-    rvFg.setLayoutManager(staggeredGridLayoutManager);
-}
+            rvFg.setLayoutManager(gridLayoutManager);
 
 
+        } else if (mPage == 3) {
 
-        ItemAdapter itemAdapter = new ItemAdapter(getContext(), child);
+            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            rvFg.setLayoutManager(staggeredGridLayoutManager);
+        }
+
+
+        ItemAdapter itemAdapter = new ItemAdapter(getContext(), mData);
+
+
+
         rvFg.setAdapter(itemAdapter);
 
         return view;
 
     }
 
-    @Override
-    public boolean handleMessage(Message message) {
 
-        switch (message.what){
-
-            case 0:
-                Toast.makeText(getContext(), "/////00", Toast.LENGTH_SHORT).show();
-                break;
-            case 1:
-                Toast.makeText(getContext(), "/////11", Toast.LENGTH_SHORT).show();
-                break;
-            case 2:
-                Toast.makeText(getContext(), "/////22", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return false;
-    }
 }
 
 class ItemAdapter extends RecyclerView.Adapter {
@@ -135,10 +132,20 @@ class ItemAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
 
         Glide.with(mContext).load(mChild[position]).into(((ItemHolder) holder).ivPicture);
+
+        ((ItemHolder) holder).ivPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, ItemActivity.class);
+
+                intent.putExtra("picture",mChild[position]);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 
