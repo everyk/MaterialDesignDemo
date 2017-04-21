@@ -1,7 +1,7 @@
 package com.materialdesigndemo.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -18,8 +18,9 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.materialdesigndemo.adapter.MyFragmentPageAdapter;
-import com.materialdesigndemo.utils.MDUtils;
+
+
+import com.materialdesigndemo.adapter.ViewPageAdapter;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -32,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private FloatingActionButton fabMain;
 
-
-    private MyFragmentPageAdapter myFragmentPageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +62,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fabMain.setOnClickListener(this);
 
 
-       myFragmentPageAdapter = new MyFragmentPageAdapter(getSupportFragmentManager(), this);
+        ViewPageAdapter myFragmentPageAdapter = new ViewPageAdapter(getSupportFragmentManager(), this);
         vpMain.setAdapter(myFragmentPageAdapter);
-       tabLayout.setupWithViewPager(vpMain);
+        tabLayout.setupWithViewPager(vpMain);
 
 
     }
@@ -80,6 +79,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navView = (NavigationView) findViewById(R.id.nav_view);
         fabMain = (FloatingActionButton) findViewById(R.id.fab_main);
 
+
+        ViewPageAdapter myPageAdapter = new ViewPageAdapter(getSupportFragmentManager(), this);
+
+
+        vpMain.setAdapter(myPageAdapter);
+
+
+        tabLayout.setupWithViewPager(vpMain);
+
+
+
+        /*
+        * TabGravity有两种效果，TabLayout.GRAVITY_CENTER和TabLayout.GRAVITY_FILL
+        * 前者是居中，后者是尽可能的填充
+        * */
+       // tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        /*
+        * TabMode也有两种效果，TabLayout.MODE_SCROLLABLE和TabLayout.MODE_FIXED
+        * 前者是可滚动的tabs,后者是固定的tabs并同时显示所以的tabs
+        * */
+
+       // tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
     }
 
@@ -120,15 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
-        if (item.toString().equals("小孩")) {
-            MDUtils.CHOOSE=MDUtils.CHILD;
 
-        } else if (item.toString().equals("风景")) {
-            MDUtils.CHOOSE=MDUtils.SCENERY;
-
-        } else if (item.toString().equals("宠物")) {
-            MDUtils.CHOOSE=MDUtils.PET;
-        }
 
 
         return false;

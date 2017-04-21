@@ -4,15 +4,25 @@
         <item
             android:id="@+id/item_1"
             android:icon="@mipmap/ic_task"
-            android:title="小孩" />
+
+
+            android:title="item1" />
         <item
             android:id="@+id/item_2"
             android:icon="@mipmap/ic_del_list"
-            android:title="风景" />
+            android:title="item2" />
         <item
             android:id="@+id/item_3"
             android:icon="@mipmap/ic_del"
-            android:title="宠物" />
+            android:title="item3" />
+        <item
+            android:id="@+id/item_4"
+            android:icon="@mipmap/ic_classify"
+            android:title="item4" />
+        <item
+            android:id="@+id/item_5"
+            android:icon="@mipmap/ic_about"
+            android:title="item5" />
 
 
 

@@ -4,27 +4,20 @@ package com.materialdesigndemo.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.materialdesigndemo.activity.ItemActivity;
 import com.materialdesigndemo.activity.R;
-import com.materialdesigndemo.utils.MDUtils;
 
 
 /**
@@ -57,13 +50,9 @@ public class PagerFragment extends Fragment {
 
         mPage = getArguments().getInt("page");
 
-        if (MDUtils.CHOOSE == MDUtils.CHILD) {
+
             mData = new int[]{R.mipmap.xh01, R.mipmap.xh02, R.mipmap.xh03, R.mipmap.xh04, R.mipmap.xh05, R.mipmap.xh06};
-        } else if (MDUtils.CHOOSE == MDUtils.SCENERY) {
-            mData = new int[]{R.mipmap.fj01, R.mipmap.fj02, R.mipmap.fj03, R.mipmap.fj04, R.mipmap.fj05, R.mipmap.fj06};
-        } else if (MDUtils.CHOOSE == MDUtils.PET) {
-            mData = new int[]{R.mipmap.gg01, R.mipmap.gg02, R.mipmap.gg03, R.mipmap.gg04, R.mipmap.gg05, R.mipmap.gg06};
-        }
+
 
 
     }
