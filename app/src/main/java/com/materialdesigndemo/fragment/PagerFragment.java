@@ -51,8 +51,8 @@ public class PagerFragment extends Fragment {
         mPage = getArguments().getInt("page");
 
 
-            mData = new int[]{R.mipmap.xh01, R.mipmap.xh02, R.mipmap.xh03, R.mipmap.xh04, R.mipmap.xh05, R.mipmap.xh06};
-
+        mData = new int[]{R.mipmap.n1, R.mipmap.n2, R.mipmap.n3, R.mipmap.n4, R.mipmap.n5, R.mipmap.n6,
+                R.mipmap.s1, R.mipmap.s2, R.mipmap.s3, R.mipmap.s4, R.mipmap.s5, R.mipmap.s6};
 
 
     }
@@ -61,7 +61,7 @@ public class PagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fg_context, container, false);
+        View view = inflater.inflate(R.layout.fg_content, container, false);
 
         RecyclerView rvFg = (RecyclerView) view.findViewById(R.id.rv_fg);
 
@@ -69,25 +69,30 @@ public class PagerFragment extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
             rvFg.setLayoutManager(linearLayoutManager);
+
+
         } else if (mPage == 1) {
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            rvFg.setLayoutManager(linearLayoutManager);
+            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            rvFg.setLayoutManager(staggeredGridLayoutManager);
         } else if (mPage == 2) {
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-
             rvFg.setLayoutManager(gridLayoutManager);
 
 
         } else if (mPage == 3) {
 
-            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-            rvFg.setLayoutManager(staggeredGridLayoutManager);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
+            rvFg.setLayoutManager(linearLayoutManager);
+        } else if (mPage == 4) {
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            rvFg.setLayoutManager(linearLayoutManager);
         }
 
 
         ItemAdapter itemAdapter = new ItemAdapter(getContext(), mData);
-
 
 
         rvFg.setAdapter(itemAdapter);
@@ -103,9 +108,12 @@ class ItemAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private int[] mChild;
 
+
+
     public ItemAdapter(Context context, int[] child) {
         this.mContext = context;
         this.mChild = child;
+
     }
 
 
@@ -126,12 +134,13 @@ class ItemAdapter extends RecyclerView.Adapter {
 
         Glide.with(mContext).load(mChild[position]).into(((ItemHolder) holder).ivPicture);
 
+
         ((ItemHolder) holder).ivPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, ItemActivity.class);
 
-                intent.putExtra("picture",mChild[position]);
+                intent.putExtra("picture", mChild[position]);
                 mContext.startActivity(intent);
             }
         });

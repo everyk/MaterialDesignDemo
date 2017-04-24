@@ -1,11 +1,8 @@
 package com.materialdesigndemo.activity;
 
 import android.os.Bundle;
-
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,16 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
-
-
-
 
 import com.materialdesigndemo.adapter.ViewPageAdapter;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     private Toolbar tbMain;
@@ -31,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager vpMain;
     private NavigationView navView;
     private DrawerLayout drawer;
-    private FloatingActionButton fabMain;
 
 
     @Override
@@ -59,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navView.setCheckedItem(R.id.item_1);
         navView.setNavigationItemSelectedListener(this);
-        fabMain.setOnClickListener(this);
 
 
         ViewPageAdapter myFragmentPageAdapter = new ViewPageAdapter(getSupportFragmentManager(), this);
@@ -77,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         vpMain = (ViewPager) findViewById(R.id.vp_main);
         navView = (NavigationView) findViewById(R.id.nav_view);
-        fabMain = (FloatingActionButton) findViewById(R.id.fab_main);
 
 
         ViewPageAdapter myPageAdapter = new ViewPageAdapter(getSupportFragmentManager(), this);
@@ -94,14 +84,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         * TabGravity有两种效果，TabLayout.GRAVITY_CENTER和TabLayout.GRAVITY_FILL
         * 前者是居中，后者是尽可能的填充
         * */
-       // tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        // tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         /*
         * TabMode也有两种效果，TabLayout.MODE_SCROLLABLE和TabLayout.MODE_FIXED
         * 前者是可滚动的tabs,后者是固定的tabs并同时显示所以的tabs
         * */
 
-       // tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        // tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
     }
 
@@ -141,27 +131,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        Toast.makeText(MainActivity.this, item.toString(), Toast.LENGTH_SHORT).show();
+        drawer.closeDrawers();
 
-
-
-
-        return false;
+        return true;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab_main:
 
-                Snackbar.make(view, "取消", Snackbar.LENGTH_SHORT).setAction("确定", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(MainActivity.this, "floatonclick", Toast.LENGTH_SHORT).show();
-                    }
-                }).show();
-                break;
-
-
-        }
-    }
 }
