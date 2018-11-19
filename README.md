@@ -1,11 +1,11 @@
 
 
 
-###Material Design风格，用一个小Demo使用下部分控件，先看下最终效果：
+#### Material Design风格，用一个小Demo使用下部分控件，先看下最终效果：
 
 ![md.gif](http://upload-images.jianshu.io/upload_images/2470723-184a9bb065885e60.gif?imageMogr2/auto-orient/strip)
 
-###话不多说，一步步来实现
+#### 话不多说，一步步来实现
 - Toolbar
 Android开发中，为了使用自定义的标题栏，会把系统原生的Actionbar隐藏掉，因为每个Activity最顶部的标题栏就是一个Actionbar，由于设计的原因，Actionbar只能位于Activity的顶部，就不能实现MaterialDesign的一些效果，那么Toolbar登场了。
   要使用Toolbar,需要在android:theme指定一个AppTheme主题
@@ -68,7 +68,7 @@ Android开发中，为了使用自定义的标题栏，会把系统原生的Acti
   1.  这里使用了xmlns:app 指定的一个新的命名空间，是因为Maternal Design是在Android 5.0才出现，所以在小于5.0的系统Material属性不存在，为了能够兼容老系统使用app:attribute
 
  2.  @android/ ?android 的区别：@android引用的是系统的资源，?android引用的是本应用theme内的资源
-         修改 MainActivity 
+    修改 MainActivity 
 ```
 public class MainActivity extends AppCompatActivity {
     private Toolbar tbMain;
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
 ```
 只需要修改布局，设置app:headerLayout    app:menu 属性即可
 
-######接下来我们实现一个左右滑动的效果
+#### 接下来我们实现一个左右滑动的效果
 - TabLayout+ViewPger来实现
 我们还是先来看效果
 
@@ -373,7 +373,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
     }
 }
 ```
-######到这里就实现上面的效果啦~~~
+#### 到这里就实现上面的效果啦~~~
 
 这里tab注意两个小点
 
@@ -504,7 +504,7 @@ mData是图片数组，图片是从网上找的，放在mipmap里
 mPage是第几个Fragment，这里不同的Fragment设置显示不同的样式
 然后在 ItemAdapter中通过Glide加载图片
 
-######到这里已经完成了80%，行百里者半九十，保持严谨的态度，我们能让它更完美
+#### 到这里已经完成了80%，行百里者半九十，保持严谨的态度，我们能让它更完美
 
 - Toolbar滑动隐藏与显示和CollapsingToolbarLayout(可折叠标题栏)
 
