@@ -1,6 +1,3 @@
-
-
-
 #### Material Design风格，用一个小Demo使用下部分控件，先看下最终效果：
 
 ![md.gif](http://upload-images.jianshu.io/upload_images/2470723-184a9bb065885e60.gif?imageMogr2/auto-orient/strip)
@@ -68,7 +65,7 @@ Android开发中，为了使用自定义的标题栏，会把系统原生的Acti
   1.  这里使用了xmlns:app 指定的一个新的命名空间，是因为Maternal Design是在Android 5.0才出现，所以在小于5.0的系统Material属性不存在，为了能够兼容老系统使用app:attribute
 
  2.  @android/ ?android 的区别：@android引用的是系统的资源，?android引用的是本应用theme内的资源
-    修改 MainActivity 
+         修改 MainActivity 
 ```
 public class MainActivity extends AppCompatActivity {
     private Toolbar tbMain;
@@ -80,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         tbMain = (Toolbar) findViewById(R.id.tb_main);
         setSupportActionBar(tbMain);
 ```
-    效果图：
+
+   效果图：
 
 ![toolbar.png](http://upload-images.jianshu.io/upload_images/2470723-47f03186c167054e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -225,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
          />
 </android.support.v4.widget.DrawerLayout>
 ```
-注意android:layout_gravity的设定
+注意`android:layout_gravity`的设定
 我们往侧面菜单中添加布局，这里用到一个新的控件 NavigationView，老规矩，先看实现效果
 
 ![drawer.gif](http://upload-images.jianshu.io/upload_images/2470723-115741430affada7.gif?imageMogr2/auto-orient/strip)
@@ -411,7 +409,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
 ![tab_scrollable.gif](http://upload-images.jianshu.io/upload_images/2470723-b47ada481c42a375.gif?imageMogr2/auto-orient/strip)
 
 ![tab_fixed.gif](http://upload-images.jianshu.io/upload_images/2470723-af013d8f829fea4b.gif?imageMogr2/auto-orient/strip)
-######革命尚未成功，同志仍需努力，好，我们接着来
+#### 革命尚未成功，同志仍需努力，好，我们接着来
 我们给他添加点内容，这里我只显示了图片
 - RecyclerView+CardView添加内容
 ![cardview.gif](http://upload-images.jianshu.io/upload_images/2470723-6b927a1a1f06eb4b.gif?imageMogr2/auto-orient/strip)
@@ -667,4 +665,4 @@ app:layout_behavior用来处理可滚动View与AppbarLayout的联动
 用法比较简单，和Toast差不多，个人觉得是加了一个再次确认的操作防止误操作。
 好了，就到这里了，不足之请留言指正。
 
-github地址：[https://github.com/everyk/MaterialDesignDemo.git](https://github.com/everyk/MaterialDesignDemo.git)
+[github地址](https://github.com/everyk/MaterialDesignDemo.git)
