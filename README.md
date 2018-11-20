@@ -7,7 +7,7 @@
 Android开发中，为了使用自定义的标题栏，会把系统原生的Actionbar隐藏掉，因为每个Activity最顶部的标题栏就是一个Actionbar，由于设计的原因，Actionbar只能位于Activity的顶部，就不能实现MaterialDesign的一些效果，那么Toolbar登场了。
   要使用Toolbar,需要在android:theme指定一个AppTheme主题
   打开AndroidManifest.xml
-```
+```xml
 <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +17,7 @@ Android开发中，为了使用自定义的标题栏，会把系统原生的Acti
         android:theme="@style/AppTheme">
 ```
  其中android:theme="@style/AppTheme"就是需要指定的AppTheme主题，好，点击进去，来到res/values/styles.xml
-```
+```xml
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -33,7 +33,7 @@ Android开发中，为了使用自定义的标题栏，会把系统原生的Acti
        Theme.AppCompat.NoActionBar    表示深色主题，即界面的主体颜色为深色，陪衬颜色为淡色；
        Theme.appCompat.Light.NoactionBar表示淡色主题，即界面的主题颜色为淡色陪衬颜色为深色；
         这里选择淡色主题：
-```
+```xml
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -45,7 +45,7 @@ Android开发中，为了使用自定义的标题栏，会把系统原生的Acti
 </resources>
 ```
    修改activity_main.xml
-```
+```xml
  <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -66,7 +66,7 @@ Android开发中，为了使用自定义的标题栏，会把系统原生的Acti
 
  2.  @android/ ?android 的区别：@android引用的是系统的资源，?android引用的是本应用theme内的资源
          修改 MainActivity 
-```
+```java
 public class MainActivity extends AppCompatActivity {
     private Toolbar tbMain;
    
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 ![title.gif](http://upload-images.jianshu.io/upload_images/2470723-6d232854b5ae7d6a.gif?imageMogr2/auto-orient/strip)
 实现如下：
-```
+```xml
   <activity
             android:name=".MainActivity"
             android:label="Demo">
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 ```
   android:label=" " 指定显示在ToolBar中的文字内容，如果没有指定默认显示应用名称
            res/下创建menu文件夹/创建menu_main.xml 代码如下：
-  ```
+  ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         app:showAsAction="never"/>
 </menu>
 ```
-```
+```java
 public class MainActivity extends AppCompatActivity {
     private Toolbar tbMain;
   
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
 ```
 现在的标题默认在左边，有时候项目需要在中间，这个也比较容易实现
 首先 toolBar.setTitle(" ");
-```
+```xml
  <android.support.v7.widget.Toolbar
             android:id="@+id/tb_main"
             android:layout_width="match_parent"
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
 ![dawerlayout.gif](http://upload-images.jianshu.io/upload_images/2470723-d60d7833237fd422.gif?imageMogr2/auto-orient/strip)
 只要修改布局就可以实现了；
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
 我们往侧面菜单中添加布局，这里用到一个新的控件 NavigationView，老规矩，先看实现效果
 
 ![drawer.gif](http://upload-images.jianshu.io/upload_images/2470723-115741430affada7.gif?imageMogr2/auto-orient/strip)
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
 ![viewpager.gif](http://upload-images.jianshu.io/upload_images/2470723-11c53b24a9d5199a.gif?imageMogr2/auto-orient/strip)
 我们分析下：上面的标签是TabLayout，下面的内容变化是通过ViewPager+Fragment实现的
 1. 修改activity_main.xml
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
 ```
 2. 切换ViewPager，显示不同的Fragment，这里先用一个相同的布局
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -322,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
 ```
 3.创建Fragment
 
-```
+```java
 public class PageFragment extends Fragment {
  
     private int mPage;
@@ -349,7 +349,7 @@ public class PageFragment extends Fragment {
 }
 ```
 4.adapter
-```
+```java
 public class ViewPageAdapter extends FragmentPagerAdapter {
     private Context mContext;
     private String[] titles = new String[]{"Tab1", "Tab2", "Tab3", "Tab4", "Tab5"};
@@ -376,7 +376,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
 这里tab注意两个小点
 
 1. tab的颜色修改
-```
+```xml
   <android.support.design.widget.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
@@ -392,7 +392,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
 
 2. tab内容的显示和tab的长度
 
-```
+```java
 /*
         * TabGravity有两种效果，TabLayout.GRAVITY_CENTER和TabLayout.GRAVITY_FILL
         * 前者是居中，后者是尽可能的填充
@@ -415,7 +415,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
 ![cardview.gif](http://upload-images.jianshu.io/upload_images/2470723-6b927a1a1f06eb4b.gif?imageMogr2/auto-orient/strip)
 我们来分析下，其实就是不同的frangment显示了不同的布局
 1.首先修改Fragment布局
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -429,7 +429,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
 </LinearLayout>
 ```
 2.在修改item的布局
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -452,7 +452,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
 app:elevation属性指定卡片的高度
 3.RecyclerView设置显示
 RecyclerView可以实现ListView、GridView的显示效果，但是需要通过layoutManager设置
-```
+```java
 public class PagerFragment extends Fragment {
     private int mPage;
     private int[] mData;
@@ -508,7 +508,7 @@ mPage是第几个Fragment，这里不同的Fragment设置显示不同的样式
 
 ![toolbar.gif](http://upload-images.jianshu.io/upload_images/2470723-265c590d2b6b4923.gif?imageMogr2/auto-orient/strip)
 这里就是让ToolBar上滑的时候隐藏，下拉又显示出来
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -554,7 +554,7 @@ app:layout_behavior用来处理可滚动View与AppbarLayout的联动
 
 ![CollapsingToolbar.gif](http://upload-images.jianshu.io/upload_images/2470723-11695ea4c99ec7b6.gif?imageMogr2/auto-orient/strip)
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -617,7 +617,7 @@ app:layout_behavior用来处理可滚动View与AppbarLayout的联动
 </android.support.design.widget.CoordinatorLayout>
 ```
 还需要把状态栏设置成透明，res下新建values-21，在创建styles.xml
-```
+```xml
 <resources>
     <style name="itemTheme" parent="AppTheme">
         <item name="android:statusBarColor">@android:color/transparent</item>
@@ -626,7 +626,7 @@ app:layout_behavior用来处理可滚动View与AppbarLayout的联动
 ```
 
 由于Android5.0之前的系统不能识别itemTheme,所以需要对values/styles.xml进行修改
-```
+```xml
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -639,7 +639,7 @@ app:layout_behavior用来处理可滚动View与AppbarLayout的联动
 </resources>
 ```
 最后让ItemAcivity使用这个主题，修改AndroidManifest.xml
-```
+```xml
  <activity
             android:name=".ItemActivity"
             android:theme="@style/itemTheme" />
@@ -654,7 +654,7 @@ app:layout_behavior用来处理可滚动View与AppbarLayout的联动
 - Snackbar
 
 ![snackbar.gif](http://upload-images.jianshu.io/upload_images/2470723-60ee1dd2f20c5383.gif?imageMogr2/auto-orient/strip)
-```
+```java
  Snackbar.make(view, "确定点击？", Snackbar.LENGTH_SHORT).setAction("确定", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
